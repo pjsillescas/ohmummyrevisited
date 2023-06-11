@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance = null;
+
+    [SerializeField] private CinemachineVirtualCamera TopVCam;
+    [SerializeField] private CinemachineVirtualCamera ShoulderVCam;
 
     private TombWanderer tombWanderer;
 
@@ -26,7 +30,19 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SwitchToShoulderView();
+    }
+
+    public void SwitchToTopView()
+	{
+        ShoulderVCam.enabled = false;
+        TopVCam.enabled = true;
+    }
+
+    public void SwitchToShoulderView()
+	{
+        TopVCam.enabled = false;
+        ShoulderVCam.enabled = true;
     }
 
     // Update is called once per frame
