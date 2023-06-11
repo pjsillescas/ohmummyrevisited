@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TombAdvanced : MonoBehaviour
 {
+    public enum TombType { none, sarcophagus, chest, key, scroll }
+
     [SerializeField] private Transform NorthEast;
     [SerializeField] private Transform NorthWest;
     [SerializeField] private Transform SouthEast;
@@ -14,6 +16,8 @@ public class TombAdvanced : MonoBehaviour
     private Crossroads SouthEastCrossroads;
     private Crossroads SouthWestCrossroads;
 
+    private TombType type;
+
     private bool north;
     private bool south;
     private bool east;
@@ -21,26 +25,44 @@ public class TombAdvanced : MonoBehaviour
     private bool open;
     private TombWanderer tombWanderer;
 
+	private void Awake()
+	{
+        ResetTomb(TombType.none);
+        tombWanderer = null;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("start tomb advanced " + name);
-        tombWanderer = null;
 
         LoadCrossroads();
 
         Crossroads.OnAnyActivatedCrossroads += ActivateCrossroads;
+    }
+
+    public void ResetTomb(TombType type)
+	{
         north = false;
         south = false;
         east = false;
         west = false;
         open = false;
+        
+        this.type = type;
     }
+
+    public void SetTombType(TombType type)
+	{
+        Debug.Log("name " + name + " type " + type);
+        this.type = type;
+	}
+
+    public TombType GetTombType() => type;
 
 	private void OnDestroy()
 	{
         Crossroads.OnAnyActivatedCrossroads -= ActivateCrossroads;
-        Debug.Log("destroying " + name);
 	}
 
 	private void LoadCrossroads()
@@ -176,6 +198,29 @@ public class TombAdvanced : MonoBehaviour
 
     private void OpenTomb()
     {
-        GetComponentInChildren<MeshRenderer>().material.color = Color.blue;
+        Color color;
+
+        switch(type)
+		{
+            case TombType.scroll:
+                color = Color.black;
+                break;
+            case TombType.chest:
+                color = Color.yellow;
+                break;
+            case TombType.key:
+                color = Color.white;
+                break;
+            case TombType.sarcophagus:
+                color = Color.red;
+                break;
+            case TombType.none:
+            default:
+                color = Color.blue;
+                break;
+		}
+
+        Debug.Log(name + " => " + type + " => " + color);
+        GetComponentInChildren<MeshRenderer>().material.color = color;
     }
 }
