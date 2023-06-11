@@ -10,25 +10,15 @@ public class ViewSwitcher : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-        if (View == ViewType.top)
-        {
-            LevelManager.Instance.SwitchToTopView();
-        }
-        else
+        switch(View)
 		{
-            LevelManager.Instance.SwitchToShoulderView();
-        }
-    }
-
-	// Start is called before the first frame update
-	void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+            case ViewType.top:
+                LevelManager.Instance.SwitchToTopView();
+                break;
+            case ViewType.shoulder:
+            default:
+                LevelManager.Instance.SwitchToShoulderView();
+                break;
+		}
     }
 }

@@ -44,10 +44,4 @@ public class LevelManager : MonoBehaviour
         TopVCam.enabled = false;
         ShoulderVCam.enabled = true;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
