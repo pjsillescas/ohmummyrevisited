@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using System;
 
 public class LevelManager : MonoBehaviour
 {
@@ -9,9 +10,14 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private CinemachineVirtualCamera TopVCam;
     [SerializeField] private CinemachineVirtualCamera ShoulderVCam;
+    [SerializeField] private Door DoorEntrance;
+    [SerializeField] private Door DoorExit;
+
 
     private TombWanderer tombWanderer;
     private List<TombAdvanced> tombs;
+    private int numTombs;
+
     private void Awake()
     {
         if (Instance != null)
@@ -31,6 +37,9 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         tombs = new (FindObjectsByType<TombAdvanced>(FindObjectsSortMode.None));
+
+        tombs.ForEach(tomb => tomb.OnOpenTomb += OnTombOpen);
+
         SwitchToShoulderView();
         ResetTombs();
     }
@@ -53,7 +62,7 @@ public class LevelManager : MonoBehaviour
         while (n > 1)
         {
             n--;
-            int k = Random.Range(0,list.Count);
+            int k = UnityEngine.Random.Range(0,list.Count);
             int value = list[k];
             list[k] = list[n];
             list[n] = value;
@@ -88,6 +97,30 @@ public class LevelManager : MonoBehaviour
         for(int k1 = 4; k1 < 10;k1++)
 		{
             tombs[shuffledList[k1]].SetTombType(TombAdvanced.TombType.chest);
+		}
+
+        numTombs = tombs.Count;
+	}
+
+    public void OpenEntranceDoor()
+	{
+        DoorEntrance.Open();
+        DoorExit.Close();
+    }
+
+    public void OpenExitDoor()
+    {
+        DoorEntrance.Close();
+        DoorExit.Open();
+    }
+
+    private void OnTombOpen(object sender, TombAdvanced tomb)
+	{
+        numTombs--;
+
+        if(numTombs <= 0)
+		{
+            OpenExitDoor();
 		}
 	}
 }

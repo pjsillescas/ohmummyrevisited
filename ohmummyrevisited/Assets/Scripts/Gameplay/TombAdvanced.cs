@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class TombAdvanced : MonoBehaviour
     [SerializeField] private Transform NorthWest;
     [SerializeField] private Transform SouthEast;
     [SerializeField] private Transform SouthWest;
+
+    public event EventHandler<TombAdvanced> OnOpenTomb;
 
     private Crossroads NorthEastCrossroads;
     private Crossroads NorthWestCrossroads;
@@ -222,5 +225,6 @@ public class TombAdvanced : MonoBehaviour
 
         Debug.Log(name + " => " + type + " => " + color);
         GetComponentInChildren<MeshRenderer>().material.color = color;
+        OnOpenTomb(this, this);
     }
 }
