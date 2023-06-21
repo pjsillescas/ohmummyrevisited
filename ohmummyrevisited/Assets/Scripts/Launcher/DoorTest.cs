@@ -11,7 +11,14 @@ public class DoorTest : MonoBehaviour
     [SerializeField] private ActionTime SelectedActionTime = ActionTime.none;
     [SerializeField] private DoorAction SelectedAction = DoorAction.none;
 
-    private void PerformAction()
+    private BoxCollider innerCollider;
+
+	private void Awake()
+	{
+        innerCollider = GetComponent<BoxCollider>();
+
+    }
+	private void PerformAction()
 	{
         switch(SelectedAction)
 		{
@@ -27,10 +34,22 @@ public class DoorTest : MonoBehaviour
             default:
                 break;
 		}
+        
+        innerCollider.isTrigger = false;
+        //LevelManager.Instance.StartScene();
+    }
 
-        GetComponent<BoxCollider>().isTrigger = false;
-	}
-	private void OnTriggerEnter(Collider other)
+    public void DeactivateCollider()
+	{
+        innerCollider.isTrigger = true;
+    }
+
+    public void ActivateCollider()
+    {
+        innerCollider.isTrigger = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
 	{
         if (SelectedDoor != null && ActionTime.onEnter.Equals(SelectedActionTime))
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using System;
+using StarterAssets;
 
 public class LevelManager : MonoBehaviour
 {
@@ -20,7 +21,8 @@ public class LevelManager : MonoBehaviour
     private bool keyUnlocked;
     private bool scrollUnlocked;
     private bool sarcophagusUnlocked;
-
+    private ThirdPersonController controller;
+    private DoorTest doorController;
 
     private void Awake()
     {
@@ -29,11 +31,16 @@ public class LevelManager : MonoBehaviour
             Debug.LogError("There is another level manager");
             return;
         }
-        Debug.Log("level manager created");
+        
         Instance = this;
-
-        tombWanderer = GameObject.FindGameObjectWithTag("Player").GetComponent<TombWanderer>();
     }
+
+    /*
+    public void StartScene()
+	{
+        //controller.SetUseInput(true);
+	}
+    */
 
     public TombWanderer GetTombWanderer() => tombWanderer;
 
@@ -46,18 +53,38 @@ public class LevelManager : MonoBehaviour
 
         SwitchToShoulderView();
         ResetTombs();
+
+        var player = GameObject.FindGameObjectWithTag("Player");
+        tombWanderer = player.GetComponent<TombWanderer>();
+        controller = player.GetComponent<ThirdPersonController>();
+        doorController = FindObjectOfType<DoorTest>();
+        DeactivateInput();
     }
 
     public void SwitchToTopView()
 	{
         ShoulderVCam.enabled = false;
         TopVCam.enabled = true;
+        //doorController.ActivateCollider();
+    }
+
+    public void DeactivateInput()
+	{
+        controller.SetUseInput(false);
+	}
+    public void ActivateInput()
+    {
+        controller.SetUseInput(true);
     }
 
     public void SwitchToShoulderView()
 	{
         TopVCam.enabled = false;
         ShoulderVCam.enabled = true;
+        if (doorController != null)
+        {
+            doorController.DeactivateCollider();
+        }
     }
 
     public static void Shuffle(List<int> list)

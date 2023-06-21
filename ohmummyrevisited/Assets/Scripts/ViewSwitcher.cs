@@ -14,10 +14,12 @@ public class ViewSwitcher : MonoBehaviour
 		{
             case ViewType.top:
                 LevelManager.Instance.SwitchToTopView();
+                LevelManager.Instance.ActivateInput();
                 break;
             case ViewType.shoulder:
             default:
                 LevelManager.Instance.SwitchToShoulderView();
+                LevelManager.Instance.DeactivateInput();
                 break;
 		}
     }

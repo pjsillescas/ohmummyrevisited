@@ -37,8 +37,6 @@ public class TombAdvanced : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("start tomb advanced " + name);
-
         LoadCrossroads();
 
         Crossroads.OnAnyActivatedCrossroads += ActivateCrossroads;
@@ -57,7 +55,7 @@ public class TombAdvanced : MonoBehaviour
 
     public void SetTombType(TombType type)
 	{
-        Debug.Log("name " + name + " type " + type);
+        //Debug.Log("name " + name + " type " + type);
         this.type = type;
 	}
 
@@ -113,12 +111,12 @@ public class TombAdvanced : MonoBehaviour
         {
             if (lastCrossroads == NorthWestCrossroads)
             {
-                Debug.Log(name + " north");
+                //Debug.Log(name + " north");
                 north = true;
             }
             else if (lastCrossroads == SouthEastCrossroads)
             {
-                Debug.Log(name + " east");
+                //Debug.Log(name + " east");
                 east = true;
             }
         }
@@ -126,12 +124,12 @@ public class TombAdvanced : MonoBehaviour
         {
             if (lastCrossroads == NorthEastCrossroads)
             {
-                Debug.Log(name + " east");
+                //Debug.Log(name + " east");
                 east = true;
             }
             else if (lastCrossroads == SouthWestCrossroads)
             {
-                Debug.Log(name + " south");
+                //Debug.Log(name + " south");
                 south = true;
             }
         }
@@ -139,12 +137,12 @@ public class TombAdvanced : MonoBehaviour
         {
             if (lastCrossroads == NorthEastCrossroads)
             {
-                Debug.Log(name + " north");
+                //Debug.Log(name + " north");
                 north = true;
             }
             else if (lastCrossroads == SouthWestCrossroads)
             {
-                Debug.Log(name + " west");
+                //Debug.Log(name + " west");
                 west = true;
             }
         }
@@ -152,12 +150,12 @@ public class TombAdvanced : MonoBehaviour
         {
             if (lastCrossroads == NorthWestCrossroads)
             {
-                Debug.Log(name + " west");
+                //Debug.Log(name + " west");
                 west = true;
             }
             else if (lastCrossroads == SouthEastCrossroads)
             {
-                Debug.Log(name + " south");
+                //Debug.Log(name + " south");
                 south = true;
             }
         }
@@ -223,7 +221,7 @@ public class TombAdvanced : MonoBehaviour
                 break;
 		}
 
-        Debug.Log(name + " => " + type + " => " + color);
+        //Debug.Log(name + " => " + type + " => " + color);
         GetComponentInChildren<MeshRenderer>().material.color = color;
         OnOpenTomb(this, this);
     }
