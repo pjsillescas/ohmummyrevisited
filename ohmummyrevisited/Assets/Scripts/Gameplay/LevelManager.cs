@@ -17,6 +17,10 @@ public class LevelManager : MonoBehaviour
     private TombWanderer tombWanderer;
     private List<TombAdvanced> tombs;
     private int numTombs;
+    private bool keyUnlocked;
+    private bool scrollUnlocked;
+    private bool sarcophagusUnlocked;
+
 
     private void Awake()
     {
@@ -71,6 +75,10 @@ public class LevelManager : MonoBehaviour
 
     public void ResetTombs()
 	{
+        keyUnlocked = false;
+        sarcophagusUnlocked = false;
+        scrollUnlocked = false;
+
         Debug.Log("reset");
 
         foreach (var tomb in tombs)
@@ -116,10 +124,31 @@ public class LevelManager : MonoBehaviour
 
     private void OnTombOpen(object sender, TombAdvanced tomb)
 	{
-        numTombs--;
-
-        if(numTombs <= 0)
+        bool previousCheck = keyUnlocked && sarcophagusUnlocked;
+        switch (tomb.GetTombType())
 		{
+            case TombAdvanced.TombType.chest:
+                ;
+                break;
+            case TombAdvanced.TombType.key:
+                keyUnlocked = true;
+                break;
+            case TombAdvanced.TombType.sarcophagus:
+                sarcophagusUnlocked = true;
+                break;
+            case TombAdvanced.TombType.scroll:
+                scrollUnlocked = true;
+                break;
+            case TombAdvanced.TombType.none:
+            default:
+                break;
+		}
+
+        numTombs--;
+        bool currentCheck = keyUnlocked && sarcophagusUnlocked;
+        //if(numTombs <= 0)
+        if (!previousCheck && currentCheck)
+        {
             OpenExitDoor();
 		}
 	}
