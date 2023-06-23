@@ -2092,21 +2092,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2061273941}
     m_Modifications:
-    - target: {fileID: 808931294881538868, guid: f75961c41ac2e4d46a7ac5371cb47963,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1228318457486588421, guid: f75961c41ac2e4d46a7ac5371cb47963,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1612357555908275461, guid: f75961c41ac2e4d46a7ac5371cb47963,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 1652514557936782462, guid: f75961c41ac2e4d46a7ac5371cb47963,
         type: 3}
       propertyPath: m_RootOrder
@@ -2166,21 +2151,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tomb
-      objectReference: {fileID: 0}
-    - target: {fileID: 1652514557936782463, guid: f75961c41ac2e4d46a7ac5371cb47963,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1652514559125071873, guid: f75961c41ac2e4d46a7ac5371cb47963,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2628644439869373373, guid: f75961c41ac2e4d46a7ac5371cb47963,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f75961c41ac2e4d46a7ac5371cb47963, type: 3}

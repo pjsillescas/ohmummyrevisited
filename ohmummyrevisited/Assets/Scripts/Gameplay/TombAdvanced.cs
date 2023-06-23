@@ -5,12 +5,25 @@ using UnityEngine;
 
 public class TombAdvanced : MonoBehaviour
 {
-    public enum TombType { none, sarcophagus, chest, key, scroll }
+    public enum TombType { none, sarcophagus, chest, key, scroll, mummy }
 
     [SerializeField] private Transform NorthEast;
     [SerializeField] private Transform NorthWest;
     [SerializeField] private Transform SouthEast;
     [SerializeField] private Transform SouthWest;
+
+    [SerializeField] private SpriteRenderer NorthSprite;
+    [SerializeField] private SpriteRenderer EastSprite;
+    [SerializeField] private SpriteRenderer SouthSprite;
+    [SerializeField] private SpriteRenderer WestSprite;
+    
+    [SerializeField] private SpriteRenderer DeactivatedSprite;
+    [SerializeField] private SpriteRenderer KeySprite;
+    [SerializeField] private SpriteRenderer SarcophagusSprite;
+    [SerializeField] private SpriteRenderer ScrollSprite;
+    [SerializeField] private SpriteRenderer MummySprite;
+    [SerializeField] private SpriteRenderer ChestSprite;
+    [SerializeField] private SpriteRenderer EmptySprite;
 
     public event EventHandler<TombAdvanced> OnOpenTomb;
 
@@ -51,6 +64,20 @@ public class TombAdvanced : MonoBehaviour
         open = false;
         
         this.type = type;
+
+        NorthSprite.enabled = false;
+        EastSprite.enabled = false;
+        SouthSprite.enabled = false;
+        WestSprite.enabled = false;
+
+        DeactivatedSprite.enabled = true;
+        
+        KeySprite.enabled = false;
+        SarcophagusSprite.enabled = false;
+        ScrollSprite.enabled = false;
+        EmptySprite.enabled = false;
+        ChestSprite.enabled = false;
+        MummySprite.enabled = false;
     }
 
     public void SetTombType(TombType type)
@@ -113,11 +140,13 @@ public class TombAdvanced : MonoBehaviour
             {
                 //Debug.Log(name + " north");
                 north = true;
+                NorthSprite.enabled = true;
             }
             else if (lastCrossroads == SouthEastCrossroads)
             {
                 //Debug.Log(name + " east");
                 east = true;
+                EastSprite.enabled = true;
             }
         }
         else if (SouthEastCrossroads == crossroads)
@@ -126,11 +155,14 @@ public class TombAdvanced : MonoBehaviour
             {
                 //Debug.Log(name + " east");
                 east = true;
+                EastSprite.enabled = true;
+
             }
             else if (lastCrossroads == SouthWestCrossroads)
             {
                 //Debug.Log(name + " south");
                 south = true;
+                SouthSprite.enabled = true;
             }
         }
         else if (NorthWestCrossroads == crossroads)
@@ -139,11 +171,13 @@ public class TombAdvanced : MonoBehaviour
             {
                 //Debug.Log(name + " north");
                 north = true;
+                NorthSprite.enabled = true;
             }
             else if (lastCrossroads == SouthWestCrossroads)
             {
                 //Debug.Log(name + " west");
                 west = true;
+                WestSprite.enabled = true;
             }
         }
         else if (SouthWestCrossroads == crossroads)
@@ -152,11 +186,13 @@ public class TombAdvanced : MonoBehaviour
             {
                 //Debug.Log(name + " west");
                 west = true;
+                WestSprite.enabled = true;
             }
             else if (lastCrossroads == SouthEastCrossroads)
             {
                 //Debug.Log(name + " south");
                 south = true;
+                SouthSprite.enabled = true;
             }
         }
 
@@ -203,8 +239,11 @@ public class TombAdvanced : MonoBehaviour
 
         switch(type)
 		{
-            case TombType.scroll:
+            case TombType.mummy:
                 color = Color.black;
+                break;
+            case TombType.scroll:
+                color = Color.cyan;
                 break;
             case TombType.chest:
                 color = Color.yellow;
@@ -221,6 +260,30 @@ public class TombAdvanced : MonoBehaviour
                 break;
 		}
 
+        DeactivatedSprite.enabled = false;
+        switch (type)
+        {
+            case TombType.mummy:
+                MummySprite.enabled = true;
+                break;
+            case TombType.scroll:
+                ScrollSprite.enabled = true;
+                break;
+            case TombType.chest:
+                ChestSprite.enabled = true;
+                break;
+            case TombType.key:
+                KeySprite.enabled = true;
+                break;
+            case TombType.sarcophagus:
+                SarcophagusSprite.enabled = true;
+                break;
+            case TombType.none:
+            default:
+                EmptySprite.enabled = true;
+                break;
+        }
+        
         //Debug.Log(name + " => " + type + " => " + color);
         GetComponentInChildren<MeshRenderer>().material.color = color;
         OnOpenTomb(this, this);
