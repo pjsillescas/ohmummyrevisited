@@ -10,6 +10,14 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance = null;
 
+    private const int CHEST_SCORE = 1000;
+    private const int SCROLL_SCORE = 100;
+    private const int SARCOPHAGUS_SCORE = 100;
+    private const int KEY_SCORE = 100;
+    private const int MUMMY_SCORE = 100;
+
+    public event EventHandler<int> OnScoreChanged;
+
     [SerializeField] private CinemachineVirtualCamera TopVCam;
     [SerializeField] private CinemachineVirtualCamera ShoulderVCam;
     [SerializeField] private Door DoorEntrance;
@@ -161,16 +169,26 @@ public class LevelManager : MonoBehaviour
         switch (tomb.GetTombType())
 		{
             case TombAdvanced.TombType.chest:
-                ;
+                AddScore(CHEST_SCORE);
                 break;
             case TombAdvanced.TombType.key:
+                AddScore(KEY_SCORE);
                 keyUnlocked = true;
                 break;
             case TombAdvanced.TombType.sarcophagus:
+                AddScore(SARCOPHAGUS_SCORE);
                 sarcophagusUnlocked = true;
                 break;
             case TombAdvanced.TombType.scroll:
+                AddScore(SCROLL_SCORE);
                 scrollUnlocked = true;
+                break;
+            case TombAdvanced.TombType.mummy:
+                AddScore(MUMMY_SCORE);
+                IncrementMummies();
+                var positions = tomb.GetCrossroadsPositions();
+                var position = positions[UnityEngine.Random.Range(0, positions.Count - 1)];
+                SpawnMummy(position);
                 break;
             case TombAdvanced.TombType.none:
             default:
@@ -184,21 +202,49 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
+    public void AddScore(int score)
+	{
+        this.score += score;
+        OnScoreChanged?.Invoke(this, this.score);
+	}
+
+    public bool IsScrollUnlocked() => scrollUnlocked;
+
+    public void ExhaustScroll()
+	{
+        scrollUnlocked = false;
+	}
+
+    private void DestroyMummy(AIManager mummy)
+	{
+        if (mummy != null)
+        {
+            Destroy(mummy.gameObject);
+        }
+    }
+
     private void SpawnMummies()
 	{
-        mummies.ForEach(mummy => Destroy(mummy.gameObject));
+        mummies.ForEach(DestroyMummy);
         mummies.Clear();
 
         var rand = new System.Random();
         for(var i=0;i<numMummies;i++)
 		{
             var position = positions[rand.Next(positions.Count)];
-            mummies.Add(Instantiate(MummyPrefab, position, Quaternion.identity).GetComponent<AIManager>());
+            SpawnMummy(position);
 		}
 	}
 
+    private void SpawnMummy(Vector3 position)
+	{
+        mummies.Add(Instantiate(MummyPrefab, position, Quaternion.identity).GetComponent<AIManager>());
+    }
+
     public void ResetGame()
 	{
+        scrollUnlocked = false;
+
         ResetTombs();
         OpenEntranceDoor();
         SpawnMummies();

@@ -12,7 +12,16 @@ public class LifeComponent : MonoBehaviour
 		if (other.CompareTag("mummy"))
 		{
             other.GetComponent<AIManager>().Die();
-            OnLifeOver?.Invoke(this, EventArgs.Empty);
+
+            if (LevelManager.Instance.IsScrollUnlocked())
+            {
+                Debug.Log("using scroll");
+                LevelManager.Instance.ExhaustScroll();
+            }
+            else
+            {
+                OnLifeOver?.Invoke(this, EventArgs.Empty);
+            }
 		}
 	}
 	// Start is called before the first frame update

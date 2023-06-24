@@ -55,6 +55,11 @@ public class TombAdvanced : MonoBehaviour
         Crossroads.OnAnyActivatedCrossroads += ActivateCrossroads;
     }
 
+    public List<Vector3> GetCrossroadsPositions()
+	{
+        return new List<Vector3> { NorthEast.position, NorthWest.position, SouthEast.position, SouthWest.position };
+	}
+
     public void ResetTomb(TombType type)
 	{
         north = false;

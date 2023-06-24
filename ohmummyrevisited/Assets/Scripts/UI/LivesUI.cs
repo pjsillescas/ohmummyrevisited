@@ -43,12 +43,4 @@ public class LivesUI : MonoBehaviour
         LiveImages[livesRemaining].enabled = false;
         yield return null;
 	}
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
 }
