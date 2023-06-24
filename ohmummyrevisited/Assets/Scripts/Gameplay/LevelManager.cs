@@ -128,8 +128,9 @@ public class LevelManager : MonoBehaviour
         tombs[shuffledList[1]].ResetTomb(TombAdvanced.TombType.chest);
         tombs[shuffledList[2]].ResetTomb(TombAdvanced.TombType.key);
         tombs[shuffledList[3]].ResetTomb(TombAdvanced.TombType.sarcophagus);
+        tombs[shuffledList[4]].ResetTomb(TombAdvanced.TombType.mummy);
 
-        for(int k1 = 4; k1 < 10;k1++)
+        for (int k1 = 5; k1 < 11;k1++)
 		{
             tombs[shuffledList[k1]].SetTombType(TombAdvanced.TombType.chest);
 		}

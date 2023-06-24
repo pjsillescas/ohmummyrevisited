@@ -63,4 +63,16 @@ public class AIManager : MonoBehaviour
         animator.enabled = true;
         yield return null;
 	}
+
+    public void Die()
+	{
+        agent.enabled = false;
+        animator.SetTrigger("Death");
+        GetComponent<BoxCollider>().enabled = false;
+	}
+
+    public void Terminate()
+	{
+        Destroy(gameObject);
+	}
 }

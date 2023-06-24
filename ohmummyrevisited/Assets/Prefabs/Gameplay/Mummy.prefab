@@ -944,9 +944,10 @@ GameObject:
   - component: {fileID: 8787418788569635695}
   - component: {fileID: 8787418788569635694}
   - component: {fileID: 8787418788569635693}
+  - component: {fileID: 5528943569669215905}
   m_Layer: 11
   m_Name: Mummy
-  m_TagString: Untagged
+  m_TagString: mummy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1029,6 +1030,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &5528943569669215905
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8693184768132642151}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.560389, y: 2.5264103, z: 1}
+  m_Center: {x: -0.037916183, y: 0.7632054, z: 0}
 --- !u!1 &8693201602147119551
 GameObject:
   m_ObjectHideFlags: 0
