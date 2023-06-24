@@ -6,7 +6,10 @@ public class ConfigureTombs : MonoBehaviour
 {
 	private void OnTriggerEnter(Collider other)
 	{
+		/*
 		LevelManager.Instance.ResetTombs();
 		LevelManager.Instance.OpenEntranceDoor();
+		*/
+		LevelManager.Instance.ResetGame();
 	}
 }

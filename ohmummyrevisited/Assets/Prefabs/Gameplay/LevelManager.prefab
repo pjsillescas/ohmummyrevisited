@@ -44,3 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 206da639296ee1f48a0d216683137992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TopVCam: {fileID: 0}
+  ShoulderVCam: {fileID: 0}
+  DoorEntrance: {fileID: 0}
+  DoorExit: {fileID: 0}
+  MummyPrefab: {fileID: 8693184768132642151, guid: c15fcebedcf587440a46e85b7bd8bd1c,
+    type: 3}

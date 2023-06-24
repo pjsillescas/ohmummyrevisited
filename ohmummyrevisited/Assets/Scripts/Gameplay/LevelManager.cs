@@ -4,6 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using System;
 using StarterAssets;
+using System.Linq;
 
 public class LevelManager : MonoBehaviour
 {
@@ -13,16 +14,19 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera ShoulderVCam;
     [SerializeField] private Door DoorEntrance;
     [SerializeField] private Door DoorExit;
+    [SerializeField] private GameObject MummyPrefab;
 
-
+    private int numMummies;
     private TombWanderer tombWanderer;
     private List<TombAdvanced> tombs;
-    private int numTombs;
     private bool keyUnlocked;
     private bool scrollUnlocked;
     private bool sarcophagusUnlocked;
     private ThirdPersonController controller;
     private DoorTest doorController;
+    private List<Vector3> positions;
+    private List<AIManager> mummies;
+    private int score;
 
     private void Awake()
     {
@@ -33,14 +37,15 @@ public class LevelManager : MonoBehaviour
         }
         
         Instance = this;
+        numMummies = 1;
+        mummies = new();
+        score = 0;
     }
 
-    /*
-    public void StartScene()
+    public void IncrementMummies()
 	{
-        //controller.SetUseInput(true);
+        numMummies++;
 	}
-    */
 
     public TombWanderer GetTombWanderer() => tombWanderer;
 
@@ -59,6 +64,8 @@ public class LevelManager : MonoBehaviour
         controller = player.GetComponent<ThirdPersonController>();
         doorController = FindObjectOfType<DoorTest>();
         DeactivateInput();
+
+        positions = FindObjectsByType<Crossroads>(FindObjectsSortMode.None).ToList().Select(o => o.transform.position).ToList();
     }
 
     public void SwitchToTopView()
@@ -134,8 +141,6 @@ public class LevelManager : MonoBehaviour
 		{
             tombs[shuffledList[k1]].SetTombType(TombAdvanced.TombType.chest);
 		}
-
-        numTombs = tombs.Count;
 	}
 
     public void OpenEntranceDoor()
@@ -172,12 +177,30 @@ public class LevelManager : MonoBehaviour
                 break;
 		}
 
-        numTombs--;
         bool currentCheck = keyUnlocked && sarcophagusUnlocked;
-        //if(numTombs <= 0)
         if (!previousCheck && currentCheck)
         {
             OpenExitDoor();
 		}
+	}
+
+    private void SpawnMummies()
+	{
+        mummies.ForEach(mummy => Destroy(mummy.gameObject));
+        mummies.Clear();
+
+        var rand = new System.Random();
+        for(var i=0;i<numMummies;i++)
+		{
+            var position = positions[rand.Next(positions.Count)];
+            mummies.Add(Instantiate(MummyPrefab, position, Quaternion.identity).GetComponent<AIManager>());
+		}
+	}
+
+    public void ResetGame()
+	{
+        ResetTombs();
+        OpenEntranceDoor();
+        SpawnMummies();
 	}
 }
