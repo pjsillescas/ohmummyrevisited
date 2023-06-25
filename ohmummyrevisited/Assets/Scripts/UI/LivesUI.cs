@@ -29,6 +29,8 @@ public class LivesUI : MonoBehaviour
 
             if (livesRemaining == 0)
             {
+                Time.timeScale = 0;
+                GameOverUI.Instance.Show();
                 Debug.Log("game over");
             }
         }

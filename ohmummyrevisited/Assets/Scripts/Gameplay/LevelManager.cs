@@ -48,6 +48,8 @@ public class LevelManager : MonoBehaviour
         numMummies = 1;
         mummies = new();
         score = 0;
+        Time.timeScale = 1f;
+
     }
 
     public void IncrementMummies()
@@ -74,6 +76,8 @@ public class LevelManager : MonoBehaviour
         DeactivateInput();
 
         positions = FindObjectsByType<Crossroads>(FindObjectsSortMode.None).ToList().Select(o => o.transform.position).ToList();
+
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void SwitchToTopView()
@@ -120,8 +124,6 @@ public class LevelManager : MonoBehaviour
         keyUnlocked = false;
         sarcophagusUnlocked = false;
         scrollUnlocked = false;
-
-        Debug.Log("reset");
 
         foreach (var tomb in tombs)
         {
