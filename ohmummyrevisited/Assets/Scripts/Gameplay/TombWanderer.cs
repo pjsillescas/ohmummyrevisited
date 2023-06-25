@@ -22,5 +22,10 @@ public class TombWanderer : MonoBehaviour
         lastCrossroads = crossroads;
 	}
 
-    public Crossroads GetLastCrossroads() => lastCrossroads;
+	public void ResetWanderer()
+	{
+        lastCrossroads = null;
+	}
+
+	public Crossroads GetLastCrossroads() => lastCrossroads;
 }

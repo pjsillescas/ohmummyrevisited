@@ -247,6 +247,7 @@ public class LevelManager : MonoBehaviour
 	{
         scrollUnlocked = false;
 
+        tombWanderer.ResetWanderer();
         ResetTombs();
         OpenEntranceDoor();
         SpawnMummies();
