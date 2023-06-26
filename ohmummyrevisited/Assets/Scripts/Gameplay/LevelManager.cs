@@ -78,6 +78,8 @@ public class LevelManager : MonoBehaviour
         positions = FindObjectsByType<Crossroads>(FindObjectsSortMode.None).ToList().Select(o => o.transform.position).ToList();
 
         Cursor.lockState = CursorLockMode.None;
+        InventoryUI.Instance.ResetInventory();
+
     }
 
     public void SwitchToTopView()
@@ -176,14 +178,17 @@ public class LevelManager : MonoBehaviour
             case TombAdvanced.TombType.key:
                 AddScore(KEY_SCORE);
                 keyUnlocked = true;
+                InventoryUI.Instance.SetKeyStatus(true);
                 break;
             case TombAdvanced.TombType.sarcophagus:
                 AddScore(SARCOPHAGUS_SCORE);
                 sarcophagusUnlocked = true;
+                InventoryUI.Instance.SetSarcophagusStatus(true);
                 break;
             case TombAdvanced.TombType.scroll:
                 AddScore(SCROLL_SCORE);
                 scrollUnlocked = true;
+                InventoryUI.Instance.SetScrollStatus(true);
                 break;
             case TombAdvanced.TombType.mummy:
                 AddScore(MUMMY_SCORE);
@@ -215,7 +220,8 @@ public class LevelManager : MonoBehaviour
     public void ExhaustScroll()
 	{
         scrollUnlocked = false;
-	}
+        InventoryUI.Instance.SetScrollStatus(false);
+    }
 
     private void DestroyMummy(AIManager mummy)
 	{
@@ -251,5 +257,6 @@ public class LevelManager : MonoBehaviour
         ResetTombs();
         OpenEntranceDoor();
         SpawnMummies();
+        InventoryUI.Instance.ResetInventory();
 	}
 }
