@@ -97,11 +97,13 @@ namespace StarterAssets
         private bool _hasAnimator;
 
         private bool useInput;
+        private bool useMovement;
 
         public void SetUseInput(bool useInput)
         {
             this.useInput = useInput;
         }
+
         private void Awake()
         {
             // get a reference to our main camera
@@ -111,6 +113,7 @@ namespace StarterAssets
             }
 
             useInput = true;
+            useMovement = true;
         }
 
         private void Start()
@@ -131,7 +134,10 @@ namespace StarterAssets
         {
             _hasAnimator = TryGetComponent(out _animator);
 
-            Move();
+            if (useMovement)
+            {
+                Move();
+            }
         }
 
         private void AssignAnimationIDs()
@@ -144,7 +150,7 @@ namespace StarterAssets
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
             //float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
-            float targetSpeed = SprintSpeed;
+            float targetSpeed = (useMovement) ? SprintSpeed : 0f;
 
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
@@ -240,5 +246,10 @@ namespace StarterAssets
                 }
             }
         }
+
+        public void UseMovement(bool useMovement)
+		{
+            this.useMovement = useMovement;
+		}
     }
 }
