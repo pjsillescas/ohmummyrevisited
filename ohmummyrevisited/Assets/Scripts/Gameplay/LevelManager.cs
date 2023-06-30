@@ -75,8 +75,7 @@ public class LevelManager : MonoBehaviour
         doorController = FindObjectOfType<DoorTest>();
         DeactivateInput();
 
-        positions = FindObjectsByType<Crossroads>(FindObjectsSortMode.None).ToList().Select(o => o.transform.position).ToList();
-
+        positions = FindObjectsByType<Crossroads>(FindObjectsSortMode.None).ToList().FindAll(c => c.GetUseToSpawnAtReset()).Select(c => c.transform.position).ToList();
         Cursor.lockState = CursorLockMode.None;
         InventoryUI.Instance.ResetInventory();
 

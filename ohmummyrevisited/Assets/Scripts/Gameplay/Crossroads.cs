@@ -4,6 +4,7 @@ using UnityEngine;
 public class Crossroads : MonoBehaviour
 {
 	public static event EventHandler<Crossroads> OnAnyActivatedCrossroads;
+	[SerializeField] private bool UseToSpawnAtReset = true;
     private bool activated;
 
 	private void Awake()
@@ -20,6 +21,8 @@ public class Crossroads : MonoBehaviour
 			tombWanderer.SetLastCrossroads(this);
 		}
 	}
+
+	public bool GetUseToSpawnAtReset() => UseToSpawnAtReset;
 
 	public void Deactivate()
 	{

@@ -392,6 +392,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crossroads (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9219568469308526576, guid: e5e18c299a1cbce409bc76a4eaa53fc3,
+        type: 3}
+      propertyPath: UseToSpawnAtReset
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2449,6 +2454,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Crossroads (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219568469308526576, guid: e5e18c299a1cbce409bc76a4eaa53fc3,
+        type: 3}
+      propertyPath: UseToSpawnAtReset
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7648,6 +7658,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crossroads (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 9219568469308526576, guid: e5e18c299a1cbce409bc76a4eaa53fc3,
+        type: 3}
+      propertyPath: UseToSpawnAtReset
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8154,6 +8169,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Crossroads (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9219568469308526576, guid: e5e18c299a1cbce409bc76a4eaa53fc3,
+        type: 3}
+      propertyPath: UseToSpawnAtReset
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

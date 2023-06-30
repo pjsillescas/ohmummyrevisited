@@ -52,15 +52,10 @@ public class Orientator : MonoBehaviour
             else
 			{
                 isActive = false;
-                Debug.Log("before " + rotatee.transform.forward);
                 //rotatee.transform.rotation.SetLookRotation(TargetTransform.forward, TargetTransform.up);
                 rotatee.transform.rotation = Quaternion.Euler(TargetTransform.rotation.eulerAngles);
-                Debug.Log("after " + rotatee.transform.forward);
                 rotatee.GetComponent<ThirdPersonController>().UseMovement(true);
-                Debug.Log(TargetTransform.forward);
             }
-
-            Debug.Log(rotatee.transform.rotation.y);
 		}
     }
 }
